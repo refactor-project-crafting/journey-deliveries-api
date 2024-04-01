@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import * as fs from "fs/promises";
+import { DeleteDeliveryDto } from "src/deliveries/dto/delete-delivery.dto";
 import { Delivery } from "src/deliveries/entities/delivery.entity";
 
 @Injectable()
@@ -9,7 +10,6 @@ export class PersistanceRepositoryService {
   async getAllData(): Promise<Delivery[]> {
     try {
       const data = await fs.readFile(this.path, "utf8");
-      debugger;
       return JSON.parse(data) as Delivery[];
     } catch (error) {
       throw new Error(`Error reading file: ${error.message}`);
@@ -23,6 +23,20 @@ export class PersistanceRepositoryService {
       deliveries.push(data);
 
       await fs.writeFile(this.path, JSON.stringify(deliveries, null, 2));
+    } catch (error) {
+      throw new Error(`Error writing file: ${error.message}`);
+    }
+  }
+
+  async deleteData({ week, owner }: DeleteDeliveryDto): Promise<void> {
+    try {
+      const deliveries = await this.getAllData();
+
+      const newDeliveries = deliveries.filter(
+        (delivery) => !(delivery.week === week && delivery.owner === owner),
+      );
+
+      await fs.writeFile(this.path, JSON.stringify(newDeliveries, null, 2));
     } catch (error) {
       throw new Error(`Error writing file: ${error.message}`);
     }

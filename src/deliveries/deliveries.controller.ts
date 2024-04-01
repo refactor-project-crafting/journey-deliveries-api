@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from "@nestjs/common";
 import { DeliveriesService } from "./deliveries.service";
 import { CreateDeliveryDto } from "./dto/create-delivery.dto";
@@ -41,8 +42,8 @@ export class DeliveriesController {
     return this.deliveriesService.update(+id, updateDeliveryDto);
   }
 
-  @Delete(":id")
-  remove(@Param("id") id: string) {
-    return this.deliveriesService.remove(+id);
+  @Delete()
+  async remove(@Query("week") week: number, @Query("owner") owner: string) {
+    return await this.deliveriesService.remove({ week: +week, owner });
   }
 }

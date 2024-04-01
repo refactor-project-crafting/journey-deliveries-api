@@ -4,6 +4,7 @@ import { UpdateDeliveryDto } from "./dto/update-delivery.dto";
 import { PersistanceRepositoryService } from "src/persistance-repository/persistance-repository.service";
 import { Delivery } from "./entities/delivery.entity";
 import { randomUUID } from "crypto";
+import { DeleteDeliveryDto } from "./dto/delete-delivery.dto";
 
 @Injectable()
 export class DeliveriesService {
@@ -20,7 +21,6 @@ export class DeliveriesService {
   }
 
   async findAll(): Promise<Delivery[]> {
-    debugger;
     return await this.persistanceRepository.getAllData();
   }
 
@@ -32,7 +32,7 @@ export class DeliveriesService {
     return `This action updates a #${id} delivery`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} delivery`;
+  async remove(deleteDeliveryDto: DeleteDeliveryDto) {
+    return await this.persistanceRepository.deleteData(deleteDeliveryDto);
   }
 }
