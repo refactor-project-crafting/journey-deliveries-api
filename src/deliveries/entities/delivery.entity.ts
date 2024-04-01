@@ -44,7 +44,7 @@ export class Delivery {
   backtProductionUrl?: string;
 
   @Column({
-    type: "date",
+    type: "timestamp",
     default: () => "CURRENT_TIMESTAMP",
   })
   createdAt: Date;
