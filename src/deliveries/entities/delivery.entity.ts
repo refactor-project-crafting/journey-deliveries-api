@@ -1,18 +1,12 @@
-import { UUID } from "crypto";
-
-export type Urls = {
-  gitHub: string;
-  production: string;
-};
-
 export class Delivery {
-  id: UUID;
+  id: number;
   owner: string;
   week: number;
-  hasPartner: boolean;
-  firstPartnerName?: string;
-  secondPartnerName?: string;
-  deliveryDate: Date;
-  frontUrls?: Urls;
-  backUrls?: Urls;
+  firstTeammateName?: string;
+  secondTeammateName?: string;
+  frontRepoUrl?: string;
+  frontProductionUrl?: string;
+  backRepoUrl?: string;
+  backtProductionUrl?: string;
+  createdAt: Date;
 }
