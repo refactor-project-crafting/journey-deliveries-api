@@ -12,7 +12,10 @@ export class PersistanceRepositoryService {
       const data = await fs.readFile(this.path, "utf8");
       return JSON.parse(data) as Delivery[];
     } catch (error) {
-      throw new Error(`Error reading file: ${error.message}`);
+      throw new HttpException(
+        "Error geting Deliveries",
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
@@ -33,7 +36,10 @@ export class PersistanceRepositoryService {
     try {
       await fs.writeFile(this.path, JSON.stringify(deliveries, null, 2));
     } catch (error) {
-      throw new Error(`Error writing file: ${error.message}`);
+      throw new HttpException(
+        "Error Creating Delivery",
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
@@ -47,7 +53,10 @@ export class PersistanceRepositoryService {
 
       await fs.writeFile(this.path, JSON.stringify(newDeliveries, null, 2));
     } catch (error) {
-      throw new Error(`Error writing file: ${error.message}`);
+      throw new HttpException(
+        "Error Deleting Delivery",
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 }
