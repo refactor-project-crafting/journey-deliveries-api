@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import * as fs from "fs/promises";
-import { DeleteDeliveryDto } from "src/deliveries/dto/delete-delivery.dto";
+import { UniqueDataDeliveryDto } from "src/deliveries/dto/unique-data-delivery.dto";
 import { Delivery } from "src/deliveries/entities/delivery.entity";
 
 @Injectable()
@@ -43,7 +43,7 @@ export class PersistanceRepositoryService {
     }
   }
 
-  async deleteData({ week, owner }: DeleteDeliveryDto): Promise<void> {
+  async deleteData({ week, owner }: UniqueDataDeliveryDto): Promise<void> {
     const deliveries = await this.getAllData();
 
     const existingDelivery = deliveries.find(

@@ -29,9 +29,9 @@ export class DeliveriesController {
     };
   }
 
-  @Get(":id")
-  findOne(@Param("id") id: string) {
-    return this.deliveriesService.findOne(+id);
+  @Get()
+  findOne(@Query("week") week: number, @Query("owner") owner: string) {
+    return this.deliveriesService.findOne({ week: +week, owner });
   }
 
   @Patch(":id")
@@ -44,6 +44,10 @@ export class DeliveriesController {
 
   @Delete()
   async remove(@Query("week") week: number, @Query("owner") owner: string) {
-    return await this.deliveriesService.remove({ week: +week, owner });
+    await this.deliveriesService.remove({ week: +week, owner });
+
+    return {
+      message: "Delivery removed",
+    };
   }
 }

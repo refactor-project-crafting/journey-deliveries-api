@@ -1,25 +1,12 @@
 import { Module } from "@nestjs/common";
 import { DeliveriesService } from "./deliveries.service";
 import { DeliveriesController } from "./deliveries.controller";
-import { PersistanceRepositoryService } from "src/persistance-repository/persistance-repository.service";
-import * as path from "path";
+import { Delivery } from "./entities/delivery.entity";
+import { TypeOrmModule } from "@nestjs/typeorm";
 
 @Module({
+  imports: [TypeOrmModule.forFeature([Delivery])],
   controllers: [DeliveriesController],
-  providers: [
-    DeliveriesService,
-    {
-      provide: PersistanceRepositoryService,
-      useFactory: () => {
-        const deliverablesPath = path.join(
-          process.cwd(),
-          "data",
-          "deliveries.json",
-        );
-
-        return new PersistanceRepositoryService(deliverablesPath);
-      },
-    },
-  ],
+  providers: [DeliveriesService],
 })
 export class DeliveriesModule {}
