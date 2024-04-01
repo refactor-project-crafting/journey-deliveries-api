@@ -44,13 +44,21 @@ export class PersistanceRepositoryService {
   }
 
   async deleteData({ week, owner }: DeleteDeliveryDto): Promise<void> {
+    const deliveries = await this.getAllData();
+
+    const existingDelivery = deliveries.find(
+      (delivery) => delivery.week === week && delivery.owner === owner,
+    );
+
+    if (!existingDelivery) {
+      throw new HttpException("Delivery not found", HttpStatus.NOT_FOUND);
+    }
+
+    const newDeliveries = deliveries.filter(
+      (delivery) => !(delivery.week === week && delivery.owner === owner),
+    );
+
     try {
-      const deliveries = await this.getAllData();
-
-      const newDeliveries = deliveries.filter(
-        (delivery) => !(delivery.week === week && delivery.owner === owner),
-      );
-
       await fs.writeFile(this.path, JSON.stringify(newDeliveries, null, 2));
     } catch (error) {
       throw new HttpException(
