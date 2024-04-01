@@ -10,6 +10,7 @@ import {
 import { DeliveriesService } from "./deliveries.service";
 import { CreateDeliveryDto } from "./dto/create-delivery.dto";
 import { UpdateDeliveryDto } from "./dto/update-delivery.dto";
+import { Delivery } from "./entities/delivery.entity";
 
 @Controller("deliveries")
 export class DeliveriesController {
@@ -21,8 +22,10 @@ export class DeliveriesController {
   }
 
   @Get()
-  findAll() {
-    return this.deliveriesService.findAll();
+  findAll(): { deliveries: Promise<Delivery[]> } {
+    return {
+      deliveries: this.deliveriesService.findAll(),
+    };
   }
 
   @Get(":id")

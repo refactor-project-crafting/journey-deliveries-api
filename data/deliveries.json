@@ -1,1 +1,19 @@
-"coso"
+[
+  {
+    "id": 1,
+    "owner": "John Doe",
+    "week": 1,
+    "hasPartner": true,
+    "firstPartnerName": "Jane Doe",
+    "secondPartnerName": "Jim Doe",
+    "deliveryDate": "2022-01-01T00:00:00.000Z",
+    "frontUrls": {
+      "gitHub": "https://github.com/johndoe/front",
+      "production": "https://production.com/johndoe/front"
+    },
+    "backUrls": {
+      "gitHub": "https://github.com/johndoe/back",
+      "production": "https://production.com/johndoe/back"
+    }
+  }
+]

@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { CreateDeliveryDto } from "./dto/create-delivery.dto";
 import { UpdateDeliveryDto } from "./dto/update-delivery.dto";
 import { PersistanceRepositoryService } from "src/persistance-repository/persistance-repository.service";
+import { Delivery } from "./entities/delivery.entity";
 
 @Injectable()
 export class DeliveriesService {
@@ -11,7 +12,7 @@ export class DeliveriesService {
     return "This action adds a new delivery";
   }
 
-  findAll() {
+  findAll(): Promise<Delivery[]> {
     return this.persistanceRepository.getAllData();
   }
 
