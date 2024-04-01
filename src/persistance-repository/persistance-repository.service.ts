@@ -9,10 +9,22 @@ export class PersistanceRepositoryService {
   async getAllData(): Promise<Delivery[]> {
     try {
       const data = await fs.readFile(this.path, "utf8");
-
+      debugger;
       return JSON.parse(data) as Delivery[];
     } catch (error) {
       throw new Error(`Error reading file: ${error.message}`);
+    }
+  }
+
+  async createData(data: Delivery): Promise<void> {
+    try {
+      const deliveries = await this.getAllData();
+
+      deliveries.push(data);
+
+      await fs.writeFile(this.path, JSON.stringify(deliveries, null, 2));
+    } catch (error) {
+      throw new Error(`Error writing file: ${error.message}`);
     }
   }
 }

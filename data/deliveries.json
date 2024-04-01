@@ -1,7 +1,24 @@
 [
   {
-    "id": 1,
-    "owner": "John Doe",
+    "id": "4fdd1e4d-95d8-47f5-be46-9bd278049182",
+    "owner": "Lorem",
+    "week": 1,
+    "hasPartner": true,
+    "firstPartnerName": "Jane Doe",
+    "secondPartnerName": "Jim Doe",
+    "deliveryDate": "2022-01-01T00:00:00.000Z",
+    "frontUrls": {
+      "gitHub": "https://github.com/johndoe/front",
+      "production": "https://production.com/johndoe/front"
+    },
+    "backUrls": {
+      "gitHub": "https://github.com/johndoe/back",
+      "production": "https://production.com/johndoe/back"
+    }
+  },
+  {
+    "id": "c409bf5f-6826-44da-95cc-d208a489213f",
+    "owner": "Lorem 2",
     "week": 1,
     "hasPartner": true,
     "firstPartnerName": "Jane Doe",

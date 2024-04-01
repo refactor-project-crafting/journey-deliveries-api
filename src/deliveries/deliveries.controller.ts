@@ -22,9 +22,9 @@ export class DeliveriesController {
   }
 
   @Get()
-  findAll(): { deliveries: Promise<Delivery[]> } {
+  async findAll(): Promise<{ deliveries: Delivery[] }> {
     return {
-      deliveries: this.deliveriesService.findAll(),
+      deliveries: await this.deliveriesService.findAll(),
     };
   }
 

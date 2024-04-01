@@ -1,10 +1,12 @@
-type Urls = {
+import { UUID } from "crypto";
+
+export type Urls = {
   gitHub: string;
   production: string;
 };
 
 export class Delivery {
-  id: number;
+  id: UUID;
   owner: string;
   week: number;
   hasPartner: boolean;

@@ -3,17 +3,25 @@ import { CreateDeliveryDto } from "./dto/create-delivery.dto";
 import { UpdateDeliveryDto } from "./dto/update-delivery.dto";
 import { PersistanceRepositoryService } from "src/persistance-repository/persistance-repository.service";
 import { Delivery } from "./entities/delivery.entity";
+import { randomUUID } from "crypto";
 
 @Injectable()
 export class DeliveriesService {
   constructor(private persistanceRepository: PersistanceRepositoryService) {}
 
   create(createDeliveryDto: CreateDeliveryDto) {
-    return "This action adds a new delivery";
+    const newDeliveryId = randomUUID();
+    const newDelivery = {
+      id: newDeliveryId,
+      ...createDeliveryDto,
+    };
+
+    return this.persistanceRepository.createData(newDelivery);
   }
 
-  findAll(): Promise<Delivery[]> {
-    return this.persistanceRepository.getAllData();
+  async findAll(): Promise<Delivery[]> {
+    debugger;
+    return await this.persistanceRepository.getAllData();
   }
 
   findOne(id: number) {
