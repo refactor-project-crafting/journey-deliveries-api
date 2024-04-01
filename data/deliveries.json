@@ -15,5 +15,22 @@
       "gitHub": "https://github.com/johndoe/back",
       "production": "https://production.com/johndoe/back"
     }
+  },
+  {
+    "id": "1a95b767-43d5-4b6c-a375-98fe2d00863c",
+    "owner": "Marius",
+    "week": 1,
+    "hasPartner": true,
+    "firstPartnerName": "Jane Doe",
+    "secondPartnerName": "Jim Doe",
+    "deliveryDate": "2022-01-01T00:00:00.000Z",
+    "frontUrls": {
+      "gitHub": "https://github.com/johndoe/front",
+      "production": "https://production.com/johndoe/front"
+    },
+    "backUrls": {
+      "gitHub": "https://github.com/johndoe/back",
+      "production": "https://production.com/johndoe/back"
+    }
   }
 ]

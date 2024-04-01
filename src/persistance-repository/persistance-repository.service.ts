@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import * as fs from "fs/promises";
 import { DeleteDeliveryDto } from "src/deliveries/dto/delete-delivery.dto";
 import { Delivery } from "src/deliveries/entities/delivery.entity";
@@ -17,11 +17,20 @@ export class PersistanceRepositoryService {
   }
 
   async createData(data: Delivery): Promise<void> {
+    const deliveries = await this.getAllData();
+
+    const existingDelivery = deliveries.find(
+      (delivery) =>
+        delivery.week === data.week && delivery.owner === data.owner,
+    );
+
+    if (existingDelivery) {
+      throw new HttpException("Delivery already exists", HttpStatus.CONFLICT);
+    }
+
+    deliveries.push(data);
+
     try {
-      const deliveries = await this.getAllData();
-
-      deliveries.push(data);
-
       await fs.writeFile(this.path, JSON.stringify(deliveries, null, 2));
     } catch (error) {
       throw new Error(`Error writing file: ${error.message}`);
