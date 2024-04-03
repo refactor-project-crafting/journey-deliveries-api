@@ -27,7 +27,6 @@ export class DeliveriesService {
       new Delivery(),
       createDeliveryDto,
     );
-    debugger;
 
     return await this.deliveryRepository.save(newDelivery);
   }
@@ -45,10 +44,31 @@ export class DeliveriesService {
     });
   }
 
-  update(id: number, updateDeliveryDto: UpdateDeliveryDto) {
+  async update(updateDeliveryDto: UpdateDeliveryDto) {
     throw new HttpException(
       "Method not implemented.",
       HttpStatus.NOT_IMPLEMENTED,
+    );
+  }
+
+  async addTrello({ week, owner, sprint2TrelloUrl }: UpdateDeliveryDto) {
+    const existingDelivery = await this.findOne({
+      week,
+      owner,
+    });
+
+    if (!existingDelivery) {
+      throw new HttpException("Delivery doesn't exist", HttpStatus.NOT_FOUND);
+    }
+
+    return await this.deliveryRepository.update(
+      {
+        week,
+        owner,
+      },
+      {
+        sprint2TrelloUrl,
+      },
     );
   }
 
@@ -56,7 +76,7 @@ export class DeliveriesService {
     const existingDelivery = await this.findOne(uniqueDataDeliverDto);
 
     if (!existingDelivery) {
-      throw new HttpException("Delivery already exists", HttpStatus.NOT_FOUND);
+      throw new HttpException("Delivery doesn't exist", HttpStatus.NOT_FOUND);
     }
 
     return await this.deliveryRepository.delete({

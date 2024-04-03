@@ -41,7 +41,17 @@ export class Delivery {
   @Column({
     nullable: true,
   })
-  backtProductionUrl?: string;
+  backProductionUrl?: string;
+
+  @Column({
+    nullable: true,
+  })
+  sprint1TrelloUrl?: string;
+
+  @Column({
+    nullable: true,
+  })
+  sprint2TrelloUrl?: string;
 
   @Column({
     type: "timestamp",

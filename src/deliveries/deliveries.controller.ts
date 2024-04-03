@@ -34,12 +34,17 @@ export class DeliveriesController {
     return this.deliveriesService.findOne({ week: +week, owner });
   }
 
-  @Patch(":id")
-  update(
-    @Param("id") id: string,
+  @Patch()
+  async addTrello(
+    @Query("week") week: number,
+    @Query("owner") owner: string,
     @Body() updateDeliveryDto: UpdateDeliveryDto,
   ) {
-    return this.deliveriesService.update(+id, updateDeliveryDto);
+    return this.deliveriesService.addTrello({
+      week,
+      owner,
+      ...updateDeliveryDto,
+    });
   }
 
   @Delete()

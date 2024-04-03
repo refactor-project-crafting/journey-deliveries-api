@@ -4,7 +4,7 @@ import { UniqueDataDeliveryDto } from "src/deliveries/dto/unique-data-delivery.d
 import { Delivery } from "src/deliveries/entities/delivery.entity";
 
 @Injectable()
-export class PersistanceRepositoryService {
+export class PersistenceRepositoryService {
   constructor(private path: string) {}
 
   async getAllData(): Promise<Delivery[]> {
